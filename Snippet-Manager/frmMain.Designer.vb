@@ -88,6 +88,7 @@ Partial Class frmMain
         Me.txtData.Location = New System.Drawing.Point(12, 126)
         Me.txtData.Multiline = True
         Me.txtData.Name = "txtData"
+        Me.txtData.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.txtData.Size = New System.Drawing.Size(584, 202)
         Me.txtData.TabIndex = 3
         '

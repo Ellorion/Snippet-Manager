@@ -13,21 +13,21 @@
     Public Event EntryAdding(sender As Object, entry As String)
     Public Event EntryRenaming(sender As Object, renamedEntry As String, entry As String)
     Public Event EntryRemoving(sender As Object, entry As String)
-    Public Event Reload(sender As Object, ByRef items() As Object)
-    Public Event Reloaded(sender As Object)
+    Public Event DataLoad(sender As Object, ByRef items() As Object)
+    Public Event DataLoaded(sender As Object)
 
     Private strOldEntry As String = ""
     Private strNewEntry As String = ""
     Private otCombo As OperationType = OperationType.None
     Private bReloading As Boolean = False
 
-    Public Sub ReloadControl()
+    Public Sub LoadData()
         If bReloading Then Return
         bReloading = True
 
         Dim myItems() As Object = Nothing
 
-        RaiseEvent Reload(Me, myItems)
+        RaiseEvent DataLoad(Me, myItems)
 
         Me.Items.Clear()
         If Not myItems Is Nothing Then
@@ -48,7 +48,7 @@
         Me.SelectionLength = Me.SelectionStart
         otCombo = OperationType.None
 
-        RaiseEvent Reloaded(Me)
+        RaiseEvent DataLoaded(Me)
 
         bReloading = False
     End Sub
@@ -59,10 +59,24 @@
     ''' <value></value>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public ReadOnly Property TextReal As String
+    'Public ReadOnly Property TextReal As String
+    '    Get
+    '        Return strNewEntry
+    '    End Get
+    'End Property
+
+    Public Overrides Property Text As String
         Get
+            If otCombo = OperationType.None Then
+                Return MyBase.Text
+            End If
+
             Return strNewEntry
         End Get
+
+        Set(value As String)
+            MyBase.Text = value
+        End Set
     End Property
 
     Private Sub CComboBox_KeyUp(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyUp
@@ -100,7 +114,7 @@
 
             Me.ForeColor = myColor
             Me.Text = msg
-            Me.SelectionStart = Me.Text.Length
+            Me.SelectionStart = msg.Length
             Me.SelectionLength = Me.SelectionStart
 
             Return
@@ -108,7 +122,7 @@
 
         If otCombo <> OperationType.None Then
             If e.KeyCode = Keys.Escape Then
-                ReloadControl()
+                LoadData()
 
             ElseIf e.KeyCode = Keys.Enter Or e.KeyCode = Keys.Return Then
                 Select Case otCombo
@@ -121,7 +135,7 @@
                         strNewEntry = ""
                 End Select
 
-                ReloadControl()
+                LoadData()
             End If
 
             Return
@@ -131,7 +145,7 @@
     End Sub
 
     Private Sub CComboBox_LostFocus(sender As Object, e As System.EventArgs) Handles Me.LostFocus
-        ReloadControl()
+        LoadData()
     End Sub
 
     Private Sub CComboBox_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles Me.SelectedIndexChanged
