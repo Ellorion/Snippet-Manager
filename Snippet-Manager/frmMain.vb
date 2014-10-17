@@ -105,4 +105,8 @@
     Private Sub btnCopy_Click(sender As System.Object, e As System.EventArgs) Handles btnCopy.Click
         Clipboard.SetText(txtData.Text)
     End Sub
+
+    Private Sub txtData_GotFocus(sender As Object, e As System.EventArgs) Handles txtData.GotFocus
+        txtData.Select(txtData.Text.Length, txtData.Text.Length)
+    End Sub
 End Class

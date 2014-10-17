@@ -82,6 +82,8 @@ Partial Class frmMain
         '
         'txtData
         '
+        Me.txtData.AcceptsReturn = True
+        Me.txtData.AcceptsTab = True
         Me.txtData.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)

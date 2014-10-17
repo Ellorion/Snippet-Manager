@@ -87,6 +87,8 @@
     End Sub
 
     Public Sub SaveSnippet(name As String, category As String, mainCategory As String, data As String)
+        data = data.Replace("""", """""")
+
         Me.Query("UPDATE Snippet SET Data = """ + data + """ WHERE name = """ + name + """ AND CatID = (SELECT ID FROM Category WHERE name = """ + category + """ AND SubCatID = (SELECT ID FROM Category WHERE Name = """ + mainCategory + """ AND SubCatID is null))")
     End Sub
 
