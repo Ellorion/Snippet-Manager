@@ -82,6 +82,8 @@ Partial Class frmMain
         '
         'txtData
         '
+        Me.txtData.AcceptsReturn = True
+        Me.txtData.AcceptsTab = True
         Me.txtData.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -98,6 +100,7 @@ Partial Class frmMain
         Me.btnCopy.Name = "btnCopy"
         Me.btnCopy.Size = New System.Drawing.Size(75, 23)
         Me.btnCopy.TabIndex = 4
+        Me.btnCopy.TabStop = False
         Me.btnCopy.Text = "&Copy"
         Me.btnCopy.UseVisualStyleBackColor = True
         '
@@ -108,6 +111,7 @@ Partial Class frmMain
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 5
+        Me.btnSave.TabStop = False
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '

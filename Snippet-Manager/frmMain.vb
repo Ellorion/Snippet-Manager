@@ -1,6 +1,12 @@
 ﻿Public Class frmMain
     Inherits CForm
 
+    Const EM_SETTABSTOPS As Integer = &HCB
+    Declare Function SendMessageA Lib "user32" (ByVal TBHandle As IntPtr, _
+                                               ByVal EM_SETTABSTOPS As Integer, _
+                                               ByVal wParam As Integer, _
+                                               ByRef lParam As Integer) As Boolean
+
     Private mySQL As New CSQLiteSnippet
 
     Private sDBFile As String = "SnippetDB.db"
@@ -12,6 +18,8 @@
         cbCategory.LoadData()
         cbSubCategory.LoadData()
         cbSnippet.LoadData()
+
+        SendMessageA(txtData.Handle, EM_SETTABSTOPS, 1, 16)
     End Sub
 
     Private Sub cbCategory_EntryAdding(sender As Object, entry As String) Handles cbCategory.EntryAdding
