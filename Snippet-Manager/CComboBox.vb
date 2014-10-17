@@ -41,6 +41,7 @@
             Me.SelectedIndex = index
         Else
             Me.Text = ""
+            strOldEntry = ""
         End If
 
         'Me.Text = strNewEntry
